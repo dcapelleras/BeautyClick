@@ -7,9 +7,7 @@ const citaModel = require('../models/cita.model');
  * @param {*} response 
  */
 exports.get_categorias = (request, response) => {
-    console.log('recibido: GET categorias, request');
-    //return response.status(200).send({id:request.params.id});
-    
+    console.log('recibido: GET categorias, request'); 
     citaModel.getCategorias().then((categorias, error) => {
         if (error) {
             throw error.message;
@@ -43,7 +41,6 @@ exports.get_trabajadores = (request, response) => {
 
 exports.get_servicios = (request, response) => {
     console.log('recibido: GET servicios, request'); 
-    console.log(request.params.id);
     citaModel.getServicios(request.params.id).then((servicios, error) => { 
         
         if (error) {
@@ -65,8 +62,7 @@ exports.get_servicios = (request, response) => {
  */
 exports.get_trabajadores_servicio = (request, response) => {
 
-    console.log('recibido: GET trabajadores para un servicio, request');
-    console.log(request.params.id);
+    console.log('recibido: GET trabajadores para un servicio, request'); 
     //return response.status(200).send({id:request.params.id});
     citaModel.getTrabajadoresServicio(request.params.id).then((trabajadores, error) => {
 

@@ -27,7 +27,7 @@ usersSchema.set('toJSON',{virtuals:false});
 
 const Users = mongoose.model('users',usersSchema,'users');
 
-
+exports.Clientes = Users;
 exports.loginUser = (info)=>{
 
     return new Promise((resolve,reject)=>{

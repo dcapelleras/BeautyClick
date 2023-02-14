@@ -1,36 +1,9 @@
 /**
  * 
- * Definicion se Schemas
- * tabla de citas
- * ------------------
- 
- * año | mes | dia| hora | minuto | trabajador | cliente | servicio(object id)
-  
- * 
- * Hay que crear dos schemas para trabajador y servicio y apuntar a la coleccion user que representa el cliente
- * trabajador
- * --------------
- 
- * id | nombre | foto:url+jpg | descripcion | duracion: minutos | categoria
- 
- * 
- * servicio
- * -----
- 
- * nombre |descripcion | foto | duracion| categorias(object id categorias)
- * 
- * trabajadorServicio
- * trabajador | servicio
- * 
- 
-// * id| nombre | apellidos | foto:url+jpg | horario: {dias(1-5) [Hinicio,Hsalida] email | telefono |}
- //*
- //* 
- //* relacion trabajador servicio
- //* --------------------------
- //* id trabajador | id servicio
- //* 
- //*  */
+
+ *  
+ * */
+
 
 
 'use strict'
@@ -60,7 +33,7 @@ const citasSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId, ref:'Trabajadores'
     }],
     cliente:[{
-        type:mongoose.Schema.Types.ObjectId, ref:''
+        type:mongoose.Schema.Types.ObjectId, ref:'Clientes'
     }],
     servicios:[{
         type:mongoose.Schema.Types.ObjectId, ref:'Servicios'
@@ -165,14 +138,16 @@ exports.getTrabajadoresServicio = async (id_servicio) => {
     try {
         return await new Promise((resolve, reject) => {
             console.log("id_servicio: ", id_servicio);
-            //Servicios.find({ categoria:id_categoria }).populate({path:'categoria'}).exec((error, result) => {
-            Servicio_trabajador.find({ servicio: id_servicio }).populate({  path:'trabajador'  }).exec((error, result) => {
+            
+            Servicio_trabajador.find({ servicio: id_servicio }).populate('trabajador'  ).exec((error, result) => {
 
                 if (error) {
                     reject(error.message);
                     throw error.message;
                 }
                 if (result) {
+                    //FIXME: tenemos que desconponer el array para obtener solo los trabajadores
+                    result = result.map(a => a.trabajador); 
                     resolve(result);
                     console.log(result);
                 }
@@ -229,17 +204,14 @@ exports.getTrabajadores = () => {
 exports.getServicios = async (id_categoria) => {
     try {
         return await new Promise((resolve, reject) => {
-            console.log("id_categoria: ", id_categoria);
-            //Servicios.find({ categoria:id_categoria }).populate({path:'categoria'}).exec((error, result) => {
-            Servicios.find({categoria:id_categoria}).exec((error, result) => {
+            Servicios.find({ categoria: id_categoria }).exec((error, result) => {
 
             if (error) {
                     reject(error.message);
                     throw error.message;
                 }
                 if (result) {
-                    resolve(result);
-                    console.log(result);
+                    resolve(result); 
                 }
             });
         });
