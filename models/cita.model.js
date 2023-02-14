@@ -26,18 +26,22 @@ const citasSchema = new mongoose.Schema({
     hora:{
         type:mongoose.Schema.Types.Number
     },
-    minutos:{
+    minuto:{
         type:mongoose.Schema.Types.Number
     },
-    trabajador:[{
+    servicio: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'Servicios'
+    },
+    duracion: {
+        type: mongoose.Schema.Types.Number
+    },
+    trabajador:{
         type:mongoose.Schema.Types.ObjectId, ref:'Trabajadores'
-    }],
-    cliente:[{
+    },
+    cliente:{
         type:mongoose.Schema.Types.ObjectId, ref:'Clientes'
-    }],
-    servicios:[{
-        type:mongoose.Schema.Types.ObjectId, ref:'Servicios'
-    }]
+    },
+ 
     
 
 },{versionKey:false})
@@ -136,8 +140,7 @@ const Servicio_trabajador = mongoose.model('servicio_trabajador', servicio_traba
  */
 exports.getTrabajadoresServicio = async (id_servicio) => {
     try {
-        return await new Promise((resolve, reject) => {
-            console.log("id_servicio: ", id_servicio);
+        return await new Promise((resolve, reject) => { 
             
             Servicio_trabajador.find({ servicio: id_servicio }).populate('trabajador'  ).exec((error, result) => {
 
@@ -148,8 +151,7 @@ exports.getTrabajadoresServicio = async (id_servicio) => {
                 if (result) {
                     //FIXME: tenemos que desconponer el array para obtener solo los trabajadores
                     result = result.map(a => a.trabajador); 
-                    resolve(result);
-                    console.log(result);
+                    resolve(result); 
                 }
             });
         });
@@ -200,3 +202,27 @@ exports.getServicios = async (id_categoria) => {
         throw error.message;
     }
 }
+exports.addCita = async (info) => { ;
+    try {
+ 
+        const nuevacita = new Citas({
+            anyo: info.cita.anyo,
+            mes:    info.cita.mes,
+            dia:    info.cita.dia,
+            hora:   info.cita.hora,
+            minuto: info.cita.minuto,
+            servicio: mongoose.Types.ObjectId(info.cita.servicio),
+            duracion: info.cita.duracion,
+            trabajador: mongoose.Types.ObjectId(info.cita.trabajador),
+            cliente: mongoose.Types.ObjectId(info.cita.cliente)
+        }); 
+        return nuevacita.save().catch(error => { 
+            console.log("Error guardando cita ", error);
+            error.message;
+        })
+
+    } catch (error) {
+        throw error.message;
+    }
+}
+ 

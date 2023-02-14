@@ -33,14 +33,17 @@ app.use(express.urlencoded({extended:false}));
 //importar l'arxiu de rutes de product.routes
 const users = require('./routes/cliente.routes');
 const citas = require('./routes/cita.routes');
-
-app.use(require('./routes/contacto.routes'));
+const contacto = require('./routes/contacto.routes');
+ 
 //passem la instància app
 users.userRoutes(app);
 citas.citasRoutes(app);
+contacto.route(app);
 app.use('/public/img', express.static(__dirname + '/assets/img'));
 app.use(express.static(path.join(__dirname,'components')))
 //executem el servidor per escoltar en el puerto 3000 i la ip localhost---->127.0.0.1
-app.listen(config.parsed.SERVER_PORT,'localhost',()=>{
+//FIXME: url de produccion http://backend.formactiu.com/
+
+app.listen(config.parsed.SERVER_PORT, 'localhost', () => {
     console.log('Server listening on port %s',config.parsed.SERVER_PORT);
 })

@@ -38,7 +38,7 @@ exports.get_servicios = (request, response) => {
     })
 }
 /**
- * TODO: falta implemntar el modelo de datos y la llamada
+ * 
  *  
  * @param {*} response 
  */
@@ -47,11 +47,11 @@ exports.get_trabajadores_servicio = (request, response) => {
     console.log('recibido: GET trabajadores para un servicio, request'); 
     //return response.status(200).send({id:request.params.id});
     citaModel.getTrabajadoresServicio(request.params.id).then((trabajadores, error) => {
-
+        
         if (error) {
             throw error.message;
         }
-        if (trabajadores) {
+        if (trabajadores) { 
             return response.status(200).send(trabajadores);
         } else {
             return response.status(204);//no resultados
@@ -97,10 +97,9 @@ exports.get_citas_cliente = (request, response) => {
     })
 }
 exports.guardar_cita = (request, response) => {
-    console.log('recibido PUT: guardar cita de cliente, request');
-    //se pasan los datos del nuevo producto a traves de request.body.info al productModel 
-    //
-    citaModel.addCita(request.body.info).then((product, error) => {
+    console.log('recibido POST: guardar cita de cliente, request');
+
+    citaModel.addCita(request.body).then((product, error) => {
         if (error) {
             throw error.message;
         }
