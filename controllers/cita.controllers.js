@@ -62,14 +62,15 @@ exports.get_trabajadores_servicio = (request, response) => {
 }
 exports.get_citas_trabajador_dia = (request, response) => {
 
-    console.log('recibido: GET citas para un servicio, request');
-    return response.status(200).send({id: request.params.id,trabajador:request.query.trabajador});
-    /*citaModel.getCitas().then((products, error) => {
+    console.log('recibido: GET citas de un trabajador para un dia determiando, request');
+    
+    //return response.status(200).send({id: request.params.id,trabajador:request.query.trabajador});
+    citaModel.get_citas_trabajador_dia(request.query).then((citas, error) => {
         if (error) {
             throw error.message;
         }
         if (citas) {
-            return response.status(200).send(products);
+            return response.status(200).send(citas);
         } else {
             //204 no hay resultados
             return response.status(204);
@@ -77,7 +78,7 @@ exports.get_citas_trabajador_dia = (request, response) => {
     }).catch(error => {
         throw error.message;
     })
-    */
+    
 }
 exports.get_citas_cliente = (request, response) => {
 

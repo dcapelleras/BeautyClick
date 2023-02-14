@@ -225,4 +225,23 @@ exports.addCita = async (info) => { ;
         throw error.message;
     }
 }
+exports.get_citas_trabajador_dia = async (query) => {
+    console.log("QUERY: ", query);
+    try {
+        return await new Promise((resolve, reject) => {
+            Citas.find({ anyo: query.anyo,mes:query.mes,dia:query.dia,id_trabajador:query.id_trabajador }).exec((error, result) => {
+
+                if (error) {
+                    reject(error.message);
+                    throw error.message;
+                }
+                if (result) { 
+                    resolve(result);
+                }
+            });
+        });
+    } catch (error) {
+        throw error.message;
+    }
+}
  
