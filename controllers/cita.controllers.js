@@ -64,8 +64,7 @@ exports.get_citas_trabajador_dia = (request, response) => {
 
     console.log('recibido: GET citas de un trabajador para un dia determiando, request');
     
-    //return response.status(200).send({id: request.params.id,trabajador:request.query.trabajador});
-    citaModel.get_citas_trabajador_dia(request.query).then((citas, error) => {
+     citaModel.get_citas_trabajador_dia(request.query).then((citas, error) => {
         if (error) {
             throw error.message;
         }

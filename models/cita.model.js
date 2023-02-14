@@ -226,8 +226,7 @@ exports.addCita = async (info) => { ;
     }
 }
 exports.get_citas_trabajador_dia = async (query) => {
-    console.log("QUERY: ", query);
-    try {
+     try {
         return await new Promise((resolve, reject) => {
             Citas.find({ anyo: query.anyo,mes:query.mes,dia:query.dia,id_trabajador:query.id_trabajador }).exec((error, result) => {
 
