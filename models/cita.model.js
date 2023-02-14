@@ -201,6 +201,25 @@ exports.getCategorias = () => {
         throw error.message;
     })
 }
+/**
+ * 
+ * @returns lista de trabajadores
+ */
+exports.getTrabajadores = () => {
+    return new Promise((resolve, reject) => {
+        Trabajadores.find({}).exec((error, result) => {
+            if (error) {
+                reject(error.message);
+                throw error.message;
+            }
+            if (result) {
+                resolve(result);
+            }
+        })
+    }).catch(error => {
+        throw error.message;
+    })
+}
  
 /**
  * 

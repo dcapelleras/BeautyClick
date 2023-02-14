@@ -24,7 +24,8 @@ exports.citasRoutes = function (app) {
     app.get('/api/get_servicios/:id', [citasController.get_servicios]);
     //retorna trabajadores que hagan un servicio (id)
     app.get('/api/get_trabajadores_servicio/:id', [citasController.get_trabajadores_servicio]);
-
+    //retorna lista de trabajadores 
+    app.get('/api/get_trabajadores',  [citasController.get_trabajadores]);
 
     // retorna citas de un cliente
     app.get('/api/get_citas_trabajador_dia', [citasController.get_citas_trabajador_dia]);

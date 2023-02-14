@@ -23,6 +23,24 @@ exports.get_categorias = (request, response) => {
         throw error.message;
     })    
 }
+exports.get_trabajadores = (request, response) => {
+    console.log('recibido: GET trabajadores, request');
+    //return response.status(200).send({id:request.params.id});
+    
+    citaModel.getTrabajadores().then((trabajadores, error) => {
+        if (error) {
+            throw error.message;
+        }
+        if (trabajadores) {
+            return response.status(200).send(trabajadores);
+        } else {            
+            return response.status(204);//no resultados
+        }
+    }).catch(error => {
+        throw error.message;
+    })    
+}
+
 exports.get_servicios = (request, response) => {
     console.log('recibido: GET servicios, request'); 
     console.log(request.params.id);
