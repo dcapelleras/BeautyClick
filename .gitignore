@@ -1,10 +1,6 @@
 /vendor/
 node_modules/
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> e5ebfb9 (Initial commit)
+ 
 npm-debug.log
 yarn-error.log
 
@@ -21,16 +17,12 @@ public_html/storage
 public_html/hot
 
 storage/*.key
-<<<<<<< HEAD
-
-=======
-.env
->>>>>>> 408da7f (Initial commit)
+ 
 Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
-<<<<<<< HEAD
+ 
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 #git
@@ -44,12 +36,7 @@ Homestead.json
 
 # Node
 /node_modules
-<<<<<<< HEAD
->>>>>>> 3efd4e8 (Initial commit)
-=======
-=======
->>>>>>> c5c47a0 (Initial commit)
->>>>>>> e5ebfb9 (Initial commit)
+ 
 npm-debug.log
 yarn-error.log
 
@@ -66,17 +53,12 @@ public_html/storage
 public_html/hot
 
 storage/*.key
-.env
-<<<<<<< HEAD
-<<<<<<< HEAD
+ 
 Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
-=======
-=======
->>>>>>> e5ebfb9 (Initial commit)
-
+ 
 # IDEs and editors
 .idea/
 .project
@@ -102,15 +84,9 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-=======
->>>>>>> 408da7f (Initial commit)
-<<<<<<< HEAD
->>>>>>> d2ce137 (Initial commit)
-=======
-=======
+ 
 Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
->>>>>>> c5c47a0 (Initial commit)
->>>>>>> e5ebfb9 (Initial commit)
+ 
