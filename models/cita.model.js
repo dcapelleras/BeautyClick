@@ -164,6 +164,7 @@ exports.get_citas_cliente = async (query) => {
     try {
         return await new Promise((resolve, reject) => {
             Citas.find({ cliente: query.id_cliente })
+                //mostrar los campos que seencesiten .populate({ path: 'servicio', select:[nombre,descripcion] })
                 .populate({ path: 'servicio' })
                 .populate({ path: 'trabajador'})
                 //  .populate('cliente')
