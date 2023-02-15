@@ -30,16 +30,16 @@ const citasSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.Number
     },
     servicio: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'Servicios'
+        type: mongoose.Schema.Types.ObjectId, ref: 'servicios'
     },
     duracion: {
         type: mongoose.Schema.Types.Number
     },
     trabajador:{
-        type:mongoose.Schema.Types.ObjectId, ref:'Trabajadores'
+        type:mongoose.Schema.Types.ObjectId, ref:'trabajadores'
     },
     cliente:{
-        type:mongoose.Schema.Types.ObjectId, ref:'Clientes'
+        type:mongoose.Schema.Types.ObjectId, ref:'clientes'
     },
  
     
@@ -142,7 +142,8 @@ exports.getTrabajadoresServicio = async (id_servicio) => {
     try {
         return await new Promise((resolve, reject) => { 
             
-            Servicio_trabajador.find({ servicio: id_servicio }).populate('trabajador'  ).exec((error, result) => {
+            Servicio_trabajador.find({ servicio: id_servicio })
+                .populate('trabajador').exec((error, result) => {
 
                 if (error) {
                     reject(error.message);
@@ -154,6 +155,30 @@ exports.getTrabajadoresServicio = async (id_servicio) => {
                     resolve(result); 
                 }
             });
+        });
+    } catch (error) {
+        throw error.message;
+    }
+}
+exports.get_citas_cliente = async (query) => {
+    try {
+        return await new Promise((resolve, reject) => {
+            Citas.find({ cliente: query.id_cliente })
+                .populate({ path: 'servicio' })
+                .populate({ path: 'trabajador'})
+                //  .populate('cliente')
+                .exec((error, result) => {
+
+                    if (error) {
+                        reject(error.message);
+                        throw error.message;
+                    }
+                    if (result) {
+                        
+                        console.log(result);
+                        resolve(result);
+                    }
+                });
         });
     } catch (error) {
         throw error.message;
@@ -225,7 +250,7 @@ exports.addCita = async (info) => { ;
     try {
  
         const nuevacita = new Citas({
-            anyo: info.cita.anyo,
+            anio: info.cita.anyo,
             mes:    info.cita.mes,
             dia:    info.cita.dia,
             hora:   info.cita.hora,
@@ -262,4 +287,4 @@ exports.get_citas_trabajador_dia = async (query) => {
         throw error.message;
     }
 }
- 
+

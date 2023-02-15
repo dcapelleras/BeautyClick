@@ -100,12 +100,12 @@ exports.get_citas_trabajador_dia = (request, response) => {
 exports.get_citas_cliente = (request, response) => {
 
     console.log('recibido: GET citas para un cliente, request');
-    citaModel.getCitas().then((citas, error) => {
+    citaModel.get_citas_cliente(request.query).then((citas, error) => {
         if (error) {
             throw error.message;
         }
         if (citas) {
-            return response.status(200).send(products);
+            return response.status(200).send(citas);
         } else {
             //204 no hay resultados
             return response.status(204);
